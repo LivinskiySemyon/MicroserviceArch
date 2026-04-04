@@ -27,8 +27,13 @@ FastAPI приложение с аутентификацией на основе
    
 - **Запуск приложения**
   
-  ```bash
+   ```bash
    docker-compose up -d
+   ```
+   
+- **Остановка приложения**:
+   ```bash
+   docker-compose down
    ```
   
 http://localhost:8000/docs
