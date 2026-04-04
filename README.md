@@ -4,10 +4,10 @@ FastAPI приложение с аутентификацией на основе
 
 ## Технологический стек
 
-- **Services**: FastAPI, Python 3.11
-- **Database**: PostgreSQL 16 
+- **Веб-фреймворк**: FastAPI
 - **ORM**: SQLAlchemy 2.0 (Async)
-- **Migrations**: Alembic
+- **Миграции**: Alembic
+- **База данных**: PostgreSQL 16 
 - **DevOps**: Docker Compose
 
 ## Возможности
