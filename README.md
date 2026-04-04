@@ -17,5 +17,12 @@ FastAPI приложение с аутентификацией на основе
 - База данных PostgreSQL
 - Docker
 
+## Установка и запуск
+
+1. **Настройка переменных окружения**:
+   ```bash
+   copy env.example .env
+   ```
+   
   
 http://localhost:8000/docs
