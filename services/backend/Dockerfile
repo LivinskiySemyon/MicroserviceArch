@@ -27,7 +27,7 @@ EXPOSE 8000
 # Arguments from docker-compose command will be passed to uvicorn
 CMD sh -c "echo 'Starting Blog API...' && \
            echo 'Checking database connection...' && \
-           python wait-for-db.py && \
+           python services/backend/wait-for-db.py && \
            echo 'Running database migrations...' && \
            alembic upgrade head && \
            echo 'Starting uvicorn server...' && \
