@@ -36,4 +36,4 @@ FastAPI приложение с аутентификацией на основе
    docker-compose down
    ```
   
-http://localhost:8000/docs
+https://microservicearch.onrender.com
