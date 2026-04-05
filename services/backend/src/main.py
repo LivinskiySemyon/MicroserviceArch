@@ -9,14 +9,14 @@ from src.api.v1.users.router import router as users_router
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="Blog API (Monolith)",
+        title="Microservice FastAPI",
         version="1.0.0",
-        description="Монолитное приложение: пользователи, статьи, комментарии",
+        description="Микросервисное приложение: пользователи, статьи, комментарии",
         docs_url="/docs",
         openapi_url="/openapi.json",
     )
 
-    @app.get("/")
+    @app.api_route("/", methods=["GET", "HEAD"])
     async def root():
         return {"status": "ok", "service": "backend-api"}
 
