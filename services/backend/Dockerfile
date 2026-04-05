@@ -30,4 +30,4 @@ CMD sh -c "echo 'Starting Blog API...' && \
            echo 'Running database migrations...' && \
            alembic upgrade head && \
            echo 'Starting uvicorn server...' && \
-           exec uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+           exec uvicorn src.main:app --host 0.0.0.0 --port $PORT"
