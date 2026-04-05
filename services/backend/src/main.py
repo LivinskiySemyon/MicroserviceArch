@@ -17,8 +17,8 @@ def create_app() -> FastAPI:
     )
 
     @app.get("/health", tags=["Health"])
-    async def health_check():
-        return {"status": "ok", "service": "backend-api"}
+    async def root():
+    return {"status": "ok", "service": "backend-api"}
 
     app.include_router(articles_router, prefix="/api")
     app.include_router(comments_router, prefix="/api")
