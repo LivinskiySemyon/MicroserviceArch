@@ -21,7 +21,7 @@ RUN adduser -D -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
 # Expose port
-EXPOSE 8000
+EXPOSE 10000
 
 # Start script: wait for DB, run migrations, start uvicorn
 # Arguments from docker-compose command will be passed to uvicorn
@@ -30,4 +30,4 @@ CMD sh -c "echo 'Starting Blog API...' && \
            echo 'Running database migrations...' && \
            alembic upgrade head && \
            echo 'Starting uvicorn server...' && \
-           exec uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+           exec uvicorn src.main:app --host 0.0.0.0 --port 10000"
