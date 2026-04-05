@@ -35,5 +35,7 @@ FastAPI приложение с аутентификацией на основе
    ```bash
    docker-compose down
    ```
-  
-https://microservicearch.onrender.com
+
+## Ссылки
+- **Развернутое приложение**: https://microservicearch.onrender.com
+- **Swagger UI**: https://microservicearch.onrender.com/docs
