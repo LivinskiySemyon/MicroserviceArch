@@ -23,7 +23,7 @@ services:
       DATABASE_URL: postgresql+asyncpg://app:app@db/app
       JWT_SECRET: ${JWT_SECRET:-your-secret-key}
     ports:
-      - "8000:8000"
+      - "10000:10000"
     volumes:
       - ./services/backend/src:/app/src
       - ./services/backend/alembic:/app/alembic
