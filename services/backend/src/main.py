@@ -16,6 +16,10 @@ def create_app() -> FastAPI:
         openapi_url="/openapi.json",
     )
 
+    @app.get("/")
+    async def root():
+        return {"status": "ok", "service": "backend-api"}
+
     @app.get("/health", tags=["Health"])
     async def root():
         return {"status": "ok", "service": "backend-api"}
