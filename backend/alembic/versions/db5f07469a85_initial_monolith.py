@@ -1,10 +1,3 @@
-"""initial monolith
-
-Revision ID: db5f07469a85
-Revises: 
-Create Date: 2026-03-27 00:04:45.419137
-
-"""
 from typing import Sequence, Union
 
 from alembic import op
