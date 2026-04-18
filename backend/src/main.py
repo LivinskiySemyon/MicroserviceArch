@@ -20,10 +20,12 @@ def create_app() -> FastAPI:
     async def root():
         return {"status": "ok", "service": "backend-api"}
 
+    # Health check эндпоинт
     @app.get("/health", tags=["Health"])
     async def root():
         return {"status": "ok", "service": "backend-api"}
 
+    # Подключение маршрутов
     app.include_router(articles_router, prefix="/api")
     app.include_router(comments_router, prefix="/api")
     app.include_router(users_router, prefix="/api")
