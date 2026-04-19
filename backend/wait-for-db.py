@@ -1,38 +1,36 @@
-#!/usr/bin/env python3
-
-import os
-import sys
-import time
 import asyncio
+import sys
+import os
+import logging
 from sqlalchemy.ext.asyncio import create_async_engine
-from sqlalchemy.exc import OperationalError
 
-from src.infrastructure.db.config import get_database_url
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
-async def wait_for_db(max_retries: int = 30, delay: int = 2) -> bool:
-    database_url = get_database_url()
-    async_database_url = database_url.replace("postgresql://", "postgresql+asyncpg://")
-    print(f"Waiting for database at {database_url}...")
+async def wait_for_db():
+    """Ждем пока БД будет доступна перед запуском приложения"""
+    db_url = os.getenv("ASYNC_DATABASE_URL")
+    max_retries = 30
+    retry_count = 0
     
-    engine = create_async_engine(async_database_url)
-    
-    for attempt in range(1, max_retries + 1):
+    while retry_count < max_retries:
         try:
+            engine = create_async_engine(db_url)
             async with engine.begin() as conn:
-                print(f"✓ Database is ready! (attempt {attempt}/{max_retries})")
-                return True
-        except OperationalError as e:
-            print(f"✗ Database not ready (attempt {attempt}/{max_retries}): {e}")
-            if attempt < max_retries:
-                await asyncio.sleep(delay)
-            else:
-                print(f"✗ Failed to connect to database after {max_retries} attempts")
-                return False
+                await conn.exec_driver_sql("SELECT 1")
+            logger.info(f"Database is ready (backend)")
+            await engine.dispose()
+            return True
+        except Exception as e:
+            retry_count += 1
+            logger.warning(f"Database not ready ({retry_count}/{max_retries}): {e}")
+            if retry_count < max_retries:
+                await asyncio.sleep(1)
     
-    return False
+    logger.error("Could not connect to database")
+    sys.exit(1)
 
 
 if __name__ == "__main__":
-    success = asyncio.run(wait_for_db())
-    sys.exit(0 if success else 1)
+    asyncio.run(wait_for_db())
