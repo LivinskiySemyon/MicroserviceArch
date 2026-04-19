@@ -2,7 +2,7 @@ FROM python:3.11-alpine
 
 WORKDIR /app
 
-# Install system dependencies
+# System dependencies
 RUN apk update && apk add --no-cache \
     gcc \
     g++ \
@@ -10,26 +10,23 @@ RUN apk update && apk add --no-cache \
     postgresql-dev \
     musl-dev
 
-# Copy requirements and install Python dependencies
+# Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Application code
 COPY . .
 
-# Create a non-root user
+# Non-root user
 RUN adduser -D -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
-# Expose port
-EXPOSE 8000
+EXPOSE 8001
 
-# Start script: wait for DB, run migrations, start uvicorn
-# Arguments from docker-compose command will be passed to uvicorn
-CMD sh -c "echo 'Starting Blog API...' && \
-           echo 'Checking database connection...' && \
-           python wait-for-db.py && \
-           echo 'Running database migrations...' && \
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD python -c "import httpx; httpx.get('http://localhost:8001/health')" || exit 1
+
+CMD sh -c "python wait-for-db.py && \
            alembic upgrade head && \
-           echo 'Starting uvicorn server...' && \
-           exec uvicorn src.main:app --host 0.0.0.0 --port 8000 ${UVICORN_ARGS:-}"
+           exec uvicorn src.main:app --host 0.0.0.0 --port 8001"
