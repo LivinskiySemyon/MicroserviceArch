@@ -52,8 +52,12 @@ async def login_user(payload: UserLogin, db: AsyncSession = Depends(get_db)) -> 
 
 
 @router.get("/me", response_model=UserOut)
-async def get_me(current_user: User = Depends(get_current_user)) -> UserOut:
-    return UserOut.model_validate(current_user)
+async def get_me(current_user: UserDTO = Depends(get_current_user)) -> UserOut:
+    return UserOut(
+        id=current_user.id,
+        email=current_user.email,
+        username=current_user.username,
+    )
 
 
 @router.put("/me", response_model=UserOut)
