@@ -49,7 +49,20 @@ FastAPI приложение с аутентификацией на основе
 1. **Создать .env файл:**
 ```bash
 cp .env.example .env
-# Отредактировать .env если нужно изменить переменные
+```
+2. **Запустить все сервисы:**
+```bash
+docker-compose up -d
+```
+3. **Проверить статус:**
+```bash
+docker-compose ps
+docker-compose logs -f
+```
+4. **Остановить сервисы:**
+```bash
+docker-compose down
+```
 
 ## Ссылки
 - **Развернутое приложение**: https://microservicearch.onrender.com
