@@ -38,18 +38,18 @@ FastAPI приложение с аутентификацией на основе
 - **Users API**: users
 - **Связь**: `author_id` в Article/Comment - логическая ссылка, БЕЗ foreign key
 
-## Запуск и остановка приложения
-   
-- **Запуск приложения**
-  
-   ```bash
-   docker-compose up -d
-   ```
-   
-- **Остановка приложения**:
-   ```bash
-   docker-compose down
-   ```
+## Запуск
+
+### Требования
+- Docker
+- Docker Compose
+
+### Быстрый старт
+
+1. **Создать .env файл:**
+```bash
+cp .env.example .env
+# Отредактировать .env если нужно изменить переменные
 
 ## Ссылки
 - **Развернутое приложение**: https://microservicearch.onrender.com
