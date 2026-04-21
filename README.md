@@ -63,7 +63,3 @@ docker-compose logs -f
 ```bash
 docker-compose down
 ```
-
-## Ссылки
-- **Развернутое приложение**: https://microservicearch.onrender.com
-- **Swagger UI**: https://microservicearch.onrender.com/docs
